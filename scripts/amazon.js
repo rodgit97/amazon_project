@@ -1,4 +1,6 @@
+import {cart} from '../data/cart';
 
+//const cart =  [];
 
 let productsHTML=' ';
 
