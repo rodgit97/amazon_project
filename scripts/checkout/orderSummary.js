@@ -7,6 +7,7 @@ import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
 //import { money } from "../scripts/utils/money.js";
 import { dayjs } from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
+import { renderOrderSummary, renderPaymentSummary } from "./paymentSummary.js";
 
 hello();
 
@@ -144,9 +145,10 @@ export function renderOrderSummary() {
   document.querySelectorAll(".js-delete-link").forEach((link) => {
     link.addEventListener("click", () => {
       const productId = link.dataset.productId;
+      removeFromCart(productId);
+
       // console.log('delete');
       // console.log(productId);
-      removeFromCart(productId);
       // console.log(cart);
 
       // document.querySelector(
@@ -156,6 +158,8 @@ export function renderOrderSummary() {
       );
       // console.log(container);
       container.remove();
+      renderOrderSummary();
+
     });
   });
 
@@ -164,6 +168,7 @@ export function renderOrderSummary() {
       const { productId, deliveryOptionId } = element.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
+      renderPaymentSummary();
     });
   });
 }
