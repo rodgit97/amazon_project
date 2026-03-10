@@ -6,7 +6,10 @@ import { formatCurrency } from "../utils/money.js";
 import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
 //import { money } from "../scripts/utils/money.js";
 import { dayjs } from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
-import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
+import {
+  deliveryOptions,
+  getDeliveryOption,
+} from "../../data/deliveryOptions.js";
 import { renderOrderSummary, renderPaymentSummary } from "./paymentSummary.js";
 
 hello();
@@ -21,7 +24,7 @@ export function renderOrderSummary() {
   cart.forEach((cartItem) => {
     const productId = cartItem.productId;
 
-    const matchingProduct =getProduct(productId);
+    const matchingProduct = getProduct(productId);
     // let matchingProduct;
 
     // products.forEach((product) => {
@@ -47,11 +50,15 @@ export function renderOrderSummary() {
     const deliveryDate = today.add(deliveryOptions.deliveryDays, "days");
     const dateString = deliveryDate.format("dddd, MMMM D");
 
-    cartSummaryHTML += `<div class="cart-item-container 
+    cartSummaryHTML += `
+    <div class="cart-item-container 
+    js-cart-item-container
     js-cart-item-container-${matchingProduct.id}
     ">
-            <div class="delivery-date">
+            
+    <div class="delivery-date">
               Delivery date: Tuesday, June 21
+              ${dateString}
             </div>
 
             <div class="cart-item-details-grid">
@@ -72,7 +79,9 @@ export function renderOrderSummary() {
                 €${formatCurrency(matchingProduct.priceCents)}
 
                 </div>
-                <div class="product-quantity">
+                <div class="product-quantity
+                js-product-quantity-${matchingProduct.id}
+                ">
                   <span>
                     Quantity: <span class="quantity-label">
                     // 2
@@ -83,7 +92,7 @@ export function renderOrderSummary() {
                     Update
                   </span>
                   <span class="delete-quantity-link link-primary
-                  js-delete-link" 
+                  js-delete-link js-delete-link-${matchingProduct.id}" 
                   data-product-id="${matchingProduct.id}" >
                     Delete
                   </span>
@@ -142,6 +151,7 @@ export function renderOrderSummary() {
 
   document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
   console.log(cartSummaryHTML);
+  
   document.querySelectorAll(".js-delete-link").forEach((link) => {
     link.addEventListener("click", () => {
       const productId = link.dataset.productId;
@@ -159,8 +169,7 @@ export function renderOrderSummary() {
       // console.log(container);
       container.remove();
       renderOrderSummary();
-
-    });
+    },);
   });
 
   document.querySelectorAll(".js-delivery-option").forEach((element) => {
@@ -171,8 +180,7 @@ export function renderOrderSummary() {
       renderPaymentSummary();
     });
   });
-}
-
+};
 
 {
   /* <div class="delivery-options">
