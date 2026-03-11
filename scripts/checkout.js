@@ -1,3 +1,11 @@
+import { renderOrderSummary } from "./checkout/orderSummary";
+import { renderPaymentSummary } from "./checkout/paymentSummary";
+// import '../data/cart-opp.js';
+import '../data/cart-class.js';
+
+renderOrderSummary();
+renderPaymentSummary();
+
 // // import { cart } from "../data/cart.js";
 // import { cart, removeFromCart, updateDeliveryOption } from "../data/cart.js";
 // import { products } from "../data/products.js";
@@ -213,9 +221,3 @@
 //                 */
 // }
 
-import { renderOrderSummary } from "./checkout/orderSummary";
-import { renderPaymentSummary } from "./checkout/paymentSummary";
-import '../data/cart-opp.js';
-
-renderOrderSummary();
-renderPaymentSummary();
