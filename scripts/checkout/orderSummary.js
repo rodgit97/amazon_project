@@ -76,7 +76,8 @@ export function renderOrderSummary() {
                 //   $10.90
                 // €${matchingProduct.priceCents / 100}
                 //€${(matchingProduct.priceCents / 100).toFixed(2)}
-                €${formatCurrency(matchingProduct.priceCents)}
+                // €${formatCurrency(matchingProduct.priceCents)}
+                ${matchingProduct.getPrice()}
 
                 </div>
                 <div class="product-quantity
@@ -151,7 +152,7 @@ export function renderOrderSummary() {
 
   document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
   console.log(cartSummaryHTML);
-  
+
   document.querySelectorAll(".js-delete-link").forEach((link) => {
     link.addEventListener("click", () => {
       const productId = link.dataset.productId;
@@ -169,7 +170,7 @@ export function renderOrderSummary() {
       // console.log(container);
       container.remove();
       renderOrderSummary();
-    },);
+    });
   });
 
   document.querySelectorAll(".js-delivery-option").forEach((element) => {
@@ -180,7 +181,7 @@ export function renderOrderSummary() {
       renderPaymentSummary();
     });
   });
-};
+}
 
 {
   /* <div class="delivery-options">
