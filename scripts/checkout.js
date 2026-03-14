@@ -2,11 +2,15 @@ import { renderOrderSummary } from "./checkout/orderSummary";
 import { renderPaymentSummary } from "./checkout/paymentSummary";
 // import '../data/cart-opp.js';
 //import '../data/cart-class.js';
-import '../data/backend-practice.js';
+import "../data/backend-practice.js";
+import { loadPaymentSummary, loadProducts } from "../data/products.js";
 
-renderOrderSummary();
-renderPaymentSummary();
-
+// renderOrderSummary();
+// renderPaymentSummary();
+loadProducts(() => {
+  renderOrderSummary();
+  renderPaymentSummary();
+});
 // // import { cart } from "../data/cart.js";
 // import { cart, removeFromCart, updateDeliveryOption } from "../data/cart.js";
 // import { products } from "../data/products.js";
@@ -49,7 +53,7 @@ renderPaymentSummary();
 //     const deliveryDate = today.add(deliveryOptions.deliveryDays, "days");
 //     const dateString = deliveryDate.format("dddd, MMMM D");
 
-//     cartSummaryHTML += `<div class="cart-item-container 
+//     cartSummaryHTML += `<div class="cart-item-container
 //     js-cart-item-container-${matchingProduct.id}
 //     ">
 //             <div class="delivery-date">
@@ -85,7 +89,7 @@ renderPaymentSummary();
 //                     Update
 //                   </span>
 //                   <span class="delete-quantity-link link-primary
-//                   js-delete-link" 
+//                   js-delete-link"
 //                   data-product-id="${matchingProduct.id}" >
 //                     Delete
 //                   </span>
@@ -96,9 +100,9 @@ renderPaymentSummary();
 //                 <div class="delivery-options-title">
 //                   Choose a delivery option:
 //                 </div>
-                
+
 //                 // ${deliveryOptionsHTML(matchingProduct)}
-                                
+
 //                 ${deliveryOptionsHTML(matchingProduct, cartItem)}
 
 //               </div>
@@ -172,7 +176,6 @@ renderPaymentSummary();
 // }
 // renderOrderSummary();
 
-
 // {
 //   /* <div class="delivery-options">
 //                 <div class="delivery-options-title">
@@ -190,8 +193,8 @@ renderPaymentSummary();
 //                       FREE Shipping
 //                     </div>
 //                   </div>
-//                 </div> 
-                
+//                 </div>
+
 //                 <div class="delivery-option">
 //                   <input type="radio"
 //                     class="delivery-option-input"
@@ -221,4 +224,3 @@ renderPaymentSummary();
 //                 </div>
 //                 */
 // }
-
