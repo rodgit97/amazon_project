@@ -34,8 +34,8 @@ export function loadFromStorage() {
         deliveryOptionId: "2",
       },
     ];
-  };
-};
+  }
+}
 // [{
 //     productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
 //     quantity: 2,
@@ -65,7 +65,7 @@ export function loadFromStorage() {
 // }
 function saveToStorage() {
   localStorage.setItem("cart", JSON.stringify(cart));
-};
+}
 
 export function addToCart(productId) {
   let matchingItem;
@@ -84,9 +84,9 @@ export function addToCart(productId) {
       quantity: 1,
       deliveryOptionId: "1",
     });
-  };
+  }
   saveToStorage();
-};
+}
 
 export function updateDeliveryOption(productId, deliveryOptionId) {
   let matchingItem;
@@ -111,4 +111,22 @@ export function removeFromCart(productId) {
   });
   cart = newCart;
   saveToStorage();
+}
+
+export function loadCart(fun) {
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener("load", () => {
+    console.log(xhr.response);
+    
+    // products = JSON.parse(xhr.response).map((productDetails) => {
+    //   if (productDetails.type === "clothing") {
+    //     return new Clothing(productDetails);
+    //   }
+    //   return new Product(productDetails);
+    // });
+    // console.log("load products");
+    fun();
+  });
+  xhr.open("GET", "https://supersimplebackend.dev/cart");
+  xhr.send();
 }
