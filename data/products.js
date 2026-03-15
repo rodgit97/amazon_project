@@ -113,10 +113,41 @@ object3.method();
 */
 export let products = [];
 
+export function loadProductsFetch() {
+  // function loadProductsFetch() {
+  const promise = fetch("https://supersimplebackend.dev/products")
+    // fetch("https://supersimplebackend.dev/products")
+    .then((response) => {
+      // console.log(response);
+      return response.json();
+    })
+    .then((productsData) => {
+      // console.log(productsData);
+      // products = JSON.parse(xhr.response).map((productDetails) => {
+      products = productsData.map((productDetails) => {
+        if (productDetails.type === "clothing") {
+          return new Clothing(productDetails);
+        }
+        return new Product(productDetails);
+      });
+      // console.log(products);
+      console.log("load products");
+      // fun();
+    });
+  return promise;
+}
+/*
+// loadProductsFetch();
+loadProductsFetch().then(() => {
+  console.log("nest step");
+});
+*/
 export function loadProducts(fun) {
   // export function loadProducts() {
   // function loadProducts() {
+
   const xhr = new XMLHttpRequest();
+
   xhr.addEventListener("load", () => {
     // console.log(xhr.response);
     products = JSON.parse(xhr.response).map((productDetails) => {
@@ -128,7 +159,6 @@ export function loadProducts(fun) {
     // console.log(products);
     console.log("load products");
     fun();
-    
   });
   xhr.open("GET", "https://supersimplebackend.dev/products");
   xhr.send();

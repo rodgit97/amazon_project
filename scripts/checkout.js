@@ -3,15 +3,17 @@ import { renderPaymentSummary } from "./checkout/paymentSummary";
 // import '../data/cart-opp.js';
 //import '../data/cart-class.js';
 import "../data/backend-practice.js";
-import { loadPaymentSummary, loadProducts } from "../data/products.js";
+// import { loadPaymentSummary, loadProducts } from "../data/products.js";
+import { loadProducts, loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 
 Promise.all([
-  new Promise((resolve) => {
-    loadProducts(() => {
-      resolve("value1");
-    });
-  }),
+  //   new Promise((resolve) => {
+  //     loadProducts(() => {
+  //       resolve("value1");
+  //     });
+  //   }),
+  loadProductsFetch(),
   new Promise((resolve) => {
     loadCart(() => {
       resolve();
